@@ -166,6 +166,7 @@ body.light-mode #preloader { background-color: #f9fafb; }
 .bg-orb {
     position: fixed; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: 0.3;
     animation: floatOrb 25s infinite ease-in-out alternate; pointer-events: none;
+    will-change: transform;
 }
 .orb-kraft { top: -10%; right: -10%; width: 50vw; height: 50vw; background: rgba(217, 119, 6, 0.2); }
 .orb-white { bottom: -20%; left: -10%; width: 60vw; height: 60vw; background: rgba(255, 255, 255, 0.05); animation-delay: -12s; }

@@ -87,6 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 100);
 
+        // Safety timeout: 5 seconds max for preloader
+        setTimeout(() => {
+            if (preloader.style.display !== 'none') {
+                isLoaded = true; // Force-start reveal sequence
+            }
+        }, 5000);
+
         const hidePreloader = () => {
             if (preloader.dataset.hidden === 'true') return;
             preloader.dataset.hidden = 'true';
@@ -105,41 +112,50 @@ document.addEventListener('DOMContentLoaded', () => {
                             preloader.style.display = 'none';
                             document.body.style.overflow = '';
                             
-                            // Reveal Header with App-like Feel
-                            const header = document.getElementById('main-header');
-                            if (header) {
-                                gsap.from(header, {
-                                    opacity: 0,
-                                    y: -20,
-                                    duration: 0.8,
-                                    ease: 'power4.out',
-                                    clearProps: 'all'
-                                });
-                                header.style.pointerEvents = 'auto';
-                            }
-
-                            // Trigger hero entrance
-                            if (document.querySelector('.gsap-hero')) {
-                                gsap.from('.gsap-hero', {
-                                    y: 40,
-                                    opacity: 0,
-                                    duration: 1,
-                                    stagger: 0.15,
-                                    ease: 'power4.out'
-                                });
-                            }
+                            // Ensure header and hero have finished their animations if they were late
                         }
                     });
 
+                    // Start Hero Animations EARLIER - during the door opening sequence
+                    const startHeroEntrance = () => {
+                        // Reveal Header with App-like Feel
+                        const header = document.getElementById('main-header');
+                        if (header) {
+                            gsap.from(header, {
+                                opacity: 0,
+                                y: -20,
+                                duration: 1,
+                                ease: 'expo.out',
+                                clearProps: 'all'
+                            });
+                            header.style.pointerEvents = 'auto';
+                        }
+
+                        // Trigger hero entrance
+                        if (document.querySelector('.gsap-hero')) {
+                            gsap.from('.gsap-hero', {
+                                y: 30,
+                                opacity: 0,
+                                duration: 1.2,
+                                stagger: 0.1,
+                                ease: 'expo.out'
+                            });
+                        }
+                    };
+
                     if (cartonLeft && cartonRight && preloaderContent) {
                         // Cinematic Split Box Open Sequence!
-                        tl.to(preloaderContent, { scale: 1.8, opacity: 0, duration: 0.6, ease: "power2.in" }, "+=0.3"); // Zoom icon into the camera
-                        tl.to(cartonLeft, { x: "-100%", duration: 1.2, ease: "expo.inOut" }, "-=0.2"); // Open left door
-                        tl.to(cartonRight, { x: "100%", duration: 1.2, ease: "expo.inOut" }, "<"); // Open right door at same time
+                        tl.to(preloaderContent, { scale: 1.4, opacity: 0, duration: 0.4, ease: "power2.in" }, "+=0.1"); // Faster zoom
+                        tl.to(cartonLeft, { x: "-100%", duration: 1, ease: "expo.inOut", onStart: startHeroEntrance }, "-=0.2"); // Start hero anim as doors crack open
+                        tl.to(cartonRight, { x: "100%", duration: 1, ease: "expo.inOut" }, "<"); // Open right door at same time
                         tl.to(preloader, { visibility: 'hidden', duration: 0.1 });
                     } else {
                         // Regular fade for inner pages without the carton door effect
-                        tl.to(preloader, { opacity: 0, duration: 0.5 }, "+=0.2");
+                        tl.to(preloader, { 
+                            opacity: 0, 
+                            duration: 0.4, 
+                            onStart: startHeroEntrance 
+                        }, "+=0.1");
                     }
                 } else {
                     preloader.style.opacity = '0';

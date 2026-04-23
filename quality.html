@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/dojt3kryr/image/upload/v1776023462/WhatsApp_Image_2026-04-12_at_8.12.39_PM-removebg-preview_k6z9uu.png">
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dojt3kryr/image/upload/q_auto/f_auto/v1776023462/WhatsApp_Image_2026-04-12_at_8.12.39_PM-removebg-preview_k6z9uu.png">
 </head>
 <body class="selection:bg-kraft-600 selection:text-white flex flex-col min-h-screen">
     <div class="bg-orb orb-kraft"></div>
@@ -299,7 +300,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <!-- Branding -->
                 <div class="space-y-6">
-                    <img src="https://res.cloudinary.com/dojt3kryr/image/upload/f_auto,q_auto/v1776042845/WhatsApp_Image_2026-04-12_at_8.12.39_PM-removebg-preview_1_yswqi1.png" class="h-14 w-auto object-contain brightness-110" alt="Kraft Pack">
+                    <div class="flex items-center gap-3">
+                        <img src="https://res.cloudinary.com/dojt3kryr/image/upload/q_auto/f_auto/v1776023462/WhatsApp_Image_2026-04-12_at_8.12.39_PM-removebg-preview_k6z9uu.png" class="h-14 w-auto object-contain brightness-110 drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]" alt="Kraft Pack">
+                        <div class="flex flex-col">
+                            <span class="text-white font-black text-xl tracking-tighter leading-none">KRAFT <span class="text-kraft-500">PACK</span></span>
+                            <span class="text-[8px] text-gray-500 font-bold uppercase tracking-[0.2em] mt-1">Industrial Excellence</span>
+                        </div>
+                    </div>
                     <p class="text-gray-400 leading-relaxed text-sm" data-t="foo-about">كرافت باك هي شريكك الأول لحلول الكرتون المضلع، نقود الابتكار في مجال التغليف منذ عام 2016.</p>
                     <div class="flex items-center gap-4">
                         <a href="#" class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 hover:text-kraft-400 hover:bg-white/10 transition-all border border-white/5"><i class="fa-brands fa-facebook-f"></i></a>
